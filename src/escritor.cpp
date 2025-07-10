@@ -7,9 +7,9 @@
 
 using namespace std;
 escritor::escritor() {
-    // Constructor vacío
+    cout << "Inicializando escritor" << endl;
 }
-void escritor::escribir(string texto, vector<unsigned char> comprimido) {
+void escritor::escribir(const string &texto, const vector<unsigned char> &comprimido) {
     ofstream archivo(texto);
     if (archivo.is_open()) {
         for (unsigned char byte : comprimido) {
@@ -21,7 +21,7 @@ void escritor::escribir(string texto, vector<unsigned char> comprimido) {
         cout << "Error al abrir el archivo para escribir." << endl;
     }
 }
-vector<unsigned char> escritor::leer(string texto) {
+vector<unsigned char> escritor::leer(const string &texto) {
     ifstream archivo(texto, ios::binary);
     vector<unsigned char> contenido;
     if (archivo.is_open()) {

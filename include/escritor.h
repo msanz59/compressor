@@ -16,8 +16,8 @@ using namespace std;
 class escritor {
 public:
     escritor();
-    void escribir(string texto, vector<unsigned char> comprimido);
-    vector <unsigned char> leer(string texto);
+    void escribir(const string &texto, const vector<unsigned char> &comprimido);
+    vector <unsigned char> leer(const string &texto);
 private:
 };
 

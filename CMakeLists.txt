@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(compressor src/main.cpp
         src/escritor.cpp
-        include/escritor.h)
+        include/escritor.h
+        src/rlc.cpp
+        include/rlc.h)
