@@ -128,9 +128,9 @@ void huffman::guardarMapa(const std::string& ruta) {
     std::cout << "Mapa guardado en: " << ruta << std::endl;
 }
 
-vector<unsigned char> huffman::descomprimir(const vector<unsigned char> &datos) {
+vector<unsigned char> huffman::descomprimir(const vector<unsigned char> &datos, const string &rutaMapa) {
     // Cargar el mapa de códigos
-    map<unsigned char, string> mapaCodigos = cargarMapa("codigos.txt");
+    map<unsigned char, string> mapaCodigos = cargarMapa(rutaMapa);
 
     // Convertir los datos comprimidos a un string de bits
     string bits;

@@ -26,7 +26,7 @@ public:
     void constuirArbol();
     vector<unsigned char> comprimir(const vector<unsigned char> &datos);
     std::map<unsigned char, std::string> cargarMapa(const std::string &ruta);
-    vector<unsigned char> descomprimir(const vector<unsigned char> &datos);
+    vector<unsigned char> descomprimir(const vector<unsigned char> &datos, const string &rutaMapa);
 
     void guardarMapa(const std::string &ruta);
 
