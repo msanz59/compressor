@@ -7,4 +7,8 @@ add_executable(compressor src/main.cpp
         src/escritor.cpp
         include/escritor.h
         src/rlc.cpp
-        include/rlc.h)
+        include/rlc.h
+        src/nodoArbol.cpp
+        include/nodoArbol.h
+        src/huffman.cpp
+        include/huffman.h)
