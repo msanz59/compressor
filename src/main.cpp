@@ -19,6 +19,7 @@ int main() {
     escritor.escribir("prueba_descomprimida.txt", datosDescomprimidosLeidos);
 
     std::vector<unsigned char> datosHuffman = compresorHuffman.comprimir(datosDescomprimidosLeidos);
-    escritor.escribir("prueba_huffman.txt", datosHuffman);
+    escritor.escribir("prueba_huffman.bin", datosHuffman);
+    compresorHuffman.guardarMapa("codigos.txt");
 
 }

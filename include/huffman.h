@@ -25,8 +25,9 @@ public:
     map<unsigned char, string> getCodigos();
     void constuirArbol();
     vector<unsigned char> comprimir(const vector<unsigned char> &datos);
+    std::map<unsigned char, std::string> cargarMapa(const std::string &ruta);
 
-
+    void guardarMapa(const std::string &ruta);
 
 private:
     map<unsigned char, int> frecuencias;
@@ -37,6 +38,8 @@ private:
     void generarCodigosdesde(nodoArbol* nodo, const string& camino);
     nodoArbol* raiz = nullptr;
     vector<unsigned char> escribirCodificado();
+
+
 };
 
 

@@ -6,6 +6,9 @@
 
 #include "../include/huffman.h"
 
+#include <fstream>
+#include <sstream>
+
 huffman::huffman(){
     cout << "Inicializando compresor Huffman" << endl;
     raiz = nullptr;
@@ -79,6 +82,48 @@ vector<unsigned char> huffman::escribirCodificado() {
         resultado.push_back(byte);
     }
     return resultado;
+}
+std::map<unsigned char, std::string> huffman::cargarMapa(const std::string& ruta) {
+    std::ifstream archivo(ruta);
+    std::map<unsigned char, std::string> mapa;
+
+    if (!archivo.is_open()) {
+        std::cerr << "No se pudo abrir el archivo del mapa." << std::endl;
+        return mapa;
+    }
+
+    std::string linea;
+    while (std::getline(archivo, linea)) {
+        std::istringstream ss(linea);
+        std::string parte;
+        int claveAscii;
+        std::string codigo;
+
+        if (std::getline(ss, parte, ':')) {
+            claveAscii = std::stoi(parte);
+            if (std::getline(ss, codigo)) {
+                mapa[static_cast<unsigned char>(claveAscii)] = codigo;
+            }
+        }
+    }
+
+    archivo.close();
+    return mapa;
+}
+
+void huffman::guardarMapa(const std::string& ruta) {
+    std::ofstream archivo(ruta);
+    if (!archivo.is_open()) {
+        std::cerr << "No se pudo abrir el archivo para guardar el mapa." << std::endl;
+        return;
+    }
+
+    for (const auto& par : codigos) {
+        archivo << static_cast<int>(par.first) << ":" << par.second << "\n";
+    }
+
+    archivo.close();
+    std::cout << "Mapa guardado en: " << ruta << std::endl;
 }
 
 
