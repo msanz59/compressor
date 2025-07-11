@@ -27,10 +27,7 @@ vector<unsigned char> rlc::comprimir(vector<unsigned char> datos) {
         i++;
     }
 
-    cout << endl << "Resultado en hexadecimal: " << endl;
-    for (unsigned char byte : resultado) {
-        std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-    }
+
 
     return resultado;
 

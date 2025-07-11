@@ -17,7 +17,7 @@ huffman::huffman(){
 void huffman::contarfrecuencias() {
     for (unsigned char byte : codigosLeidos) {
         frecuencias[byte]++;
-        cout << "Leído: " << (int)byte << " -> '" << byte << "'" << std::endl;
+
 
     }
 }
