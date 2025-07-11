@@ -8,6 +8,7 @@
 
 huffman::huffman(){
     cout << "Inicializando compresor Huffman" << endl;
+    raiz = nullptr;
 }
 
 void huffman::contarfrecuencias() {
@@ -47,31 +48,37 @@ void huffman::generarCodigosdesde(nodoArbol* nodo, const string& camino) {
     generarCodigosdesde(nodo->derecha, camino + "1");
 }
 map<unsigned char, string> huffman::getCodigos() {
-    constuirArbol();
     generarCodigosdesde(raiz, "");
     return codigos;
 }
-void huffman::comprimir(const vector<unsigned char> &datos) {
+vector<unsigned char> huffman::comprimir(const vector<unsigned char> &datos) {
         codigosLeidos = datos;
         contarfrecuencias();
         constuirArbol();
         getCodigos();
+        return escribirCodificado();
 }
 vector<unsigned char> huffman::escribirCodificado() {
     vector<unsigned char> resultado;
-    for (const auto& par : codigos) {
-        unsigned char byte = par.first;
-        string codigo = par.second;
+    string codigoCompleto;
+    for (unsigned char byte : codigosLeidos) {
+        codigoCompleto += codigos[byte];
+    }
+    // Convertir el código binario a bytes
+    for (size_t i = 0; i < codigoCompleto.size(); i += 8) {
+        std::string byteStr = codigoCompleto.substr(i, 8);
+        while (byteStr.length() < 8) byteStr += '0'; // Rellenar si es el último byte
 
-        // Convertir el código a bits y agregarlo al resultado
-        for (char bit : codigo) {
-            if (bit == '1') {
-                resultado.push_back(byte);
-            } else {
-                resultado.push_back(0);
+        unsigned char byte = 0;
+        for (int j = 0; j < 8; ++j) {
+            if (byteStr[j] == '1') {
+                byte |= (1 << (7 - j));  // Poner el bit en su lugar
             }
         }
+
+        resultado.push_back(byte);
     }
+    return resultado;
 }
 
 

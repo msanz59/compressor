@@ -24,7 +24,7 @@ public:
     huffman();
     map<unsigned char, string> getCodigos();
     void constuirArbol();
-    void comprimir(const vector<unsigned char> &datos);
+    vector<unsigned char> comprimir(const vector<unsigned char> &datos);
 
 
 

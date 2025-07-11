@@ -10,11 +10,10 @@ escritor::escritor() {
     cout << "Inicializando escritor" << endl;
 }
 void escritor::escribir(const string &texto, const vector<unsigned char> &comprimido) {
-    ofstream archivo(texto);
+    ofstream archivo(texto, ios::binary);
+    archivo.write("HF", 2);
     if (archivo.is_open()) {
-        for (unsigned char byte : comprimido) {
-            archivo << byte;
-        }
+        archivo.write(reinterpret_cast<const char*>(comprimido.data()), comprimido.size());
         archivo.close();
         cout << "Archivo escrito correctamente." << endl;
     } else {
