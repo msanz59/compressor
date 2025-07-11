@@ -17,6 +17,8 @@ huffman::huffman(){
 void huffman::contarfrecuencias() {
     for (unsigned char byte : codigosLeidos) {
         frecuencias[byte]++;
+        cout << "Leído: " << (int)byte << " -> '" << byte << "'" << std::endl;
+
     }
 }
 void huffman::constuirArbol() {
@@ -124,6 +126,36 @@ void huffman::guardarMapa(const std::string& ruta) {
 
     archivo.close();
     std::cout << "Mapa guardado en: " << ruta << std::endl;
+}
+
+vector<unsigned char> huffman::descomprimir(const vector<unsigned char> &datos) {
+    // Cargar el mapa de códigos
+    map<unsigned char, string> mapaCodigos = cargarMapa("codigos.txt");
+
+    // Convertir los datos comprimidos a un string de bits
+    string bits;
+    for (unsigned char byte : datos) {
+        for (int i = 7; i >= 0; --i) {
+            bits += ((byte >> i) & 1) ? '1' : '0';
+        }
+    }
+
+    vector<unsigned char> resultado;
+    string codigoActual;
+
+    // Recorrer los bits y reconstruir los caracteres originales
+    for (char bit : bits) {
+        codigoActual += bit;
+        for (const auto& par : mapaCodigos) {
+            if (codigoActual == par.second) {
+                resultado.push_back(par.first);
+                codigoActual.clear();
+                break;
+            }
+        }
+    }
+
+    return resultado;
 }
 
 

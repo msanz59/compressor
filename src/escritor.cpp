@@ -11,7 +11,7 @@ escritor::escritor() {
 }
 void escritor::escribir(const string &texto, const vector<unsigned char> &comprimido) {
     ofstream archivo(texto, ios::binary);
-    archivo.write("HF", 2);
+
     if (archivo.is_open()) {
         archivo.write(reinterpret_cast<const char*>(comprimido.data()), comprimido.size());
         archivo.close();
